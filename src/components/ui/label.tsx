@@ -4,7 +4,7 @@ import { cn } from "~/utilities/cn";
 
 const Label = forwardRef<HTMLLabelElement, React.ComponentProps<"label">>(({ className, children, ...props }, ref) => {
   return (
-    <label className={cn(className)} ref={ref} {...props}>
+    <label className={cn("font-medium", className)} ref={ref} {...props}>
       {children}
     </label>
   );
