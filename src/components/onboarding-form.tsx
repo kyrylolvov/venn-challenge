@@ -1,10 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { validateCorporationNumber } from "~/api/onboarding";
+import { onboardingProfileDetails, validateCorporationNumber } from "~/api/onboarding";
 import { Button } from "~/components/ui/button";
 import { Form as ReactForm, FormControl, FormField, FormItem, FormMessage } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
@@ -15,26 +16,37 @@ export const onboardingSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
   lastName: z.string().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
   phone: z.string().min(1, "Phone number is required").regex(canadianPhoneRegex, "Invalid phone number"),
-  corporation: z.string().min(1, "Corporation number is required").length(9, "Corporation number must be 9 characters long"),
+  corporationNumber: z.string().min(1, "Corporation number is required").length(9, "Corporation number must be 9 characters long"),
 });
 
 export type Onboarding = z.infer<typeof onboardingSchema>;
 
 export default function OnboardingForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<Onboarding>({
     resolver: zodResolver(onboardingSchema),
-    defaultValues: { firstName: "", lastName: "", phone: "", corporation: "" },
+    defaultValues: { firstName: "", lastName: "", phone: "", corporationNumber: "" },
   });
 
   async function onSubmit(values: Onboarding) {
+    setIsSubmitting(true);
+
     try {
-      await validateCorporationNumber(values.corporation);
+      await validateCorporationNumber(values.corporationNumber);
     } catch {
-      form.setError("corporation", { message: "Corporation number is not recognized" });
+      form.setError("corporationNumber", { message: "Corporation number is invalid" });
+      setIsSubmitting(false);
       return;
     }
 
-    console.log(values);
+    try {
+      await onboardingProfileDetails(values);
+    } catch {
+      setIsSubmitting(false);
+    }
+
+    setIsSubmitting(false);
   }
   return (
     <ReactForm {...form}>
@@ -83,7 +95,7 @@ export default function OnboardingForm() {
 
         <FormField
           control={form.control}
-          name="corporation"
+          name="corporationNumber"
           render={({ field }) => (
             <FormItem className="col-span-2">
               <Label>Corporation Number</Label>
@@ -95,7 +107,7 @@ export default function OnboardingForm() {
           )}
         />
 
-        <Button type="submit" className="col-span-2 w-full">
+        <Button disabled={isSubmitting} type="submit" className="col-span-2 w-full">
           Submit
         </Button>
       </form>

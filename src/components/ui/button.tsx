@@ -7,7 +7,7 @@ const Button = forwardRef<HTMLButtonElement, React.ComponentProps<"button">>(({ 
     <button
       className={cn(
         "bg-foreground text-background-accent cursor-pointer rounded-lg p-3 font-medium transition-colors",
-        "hover:bg-foreground/90",
+        "hover:bg-foreground/90 disabled:hover:bg-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       ref={ref}
