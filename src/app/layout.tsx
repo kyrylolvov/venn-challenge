@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sansFont.variable} grid h-screen w-screen place-items-center antialiased`}>{children}</body>
+      <body className={`${sansFont.variable} grid h-screen w-screen place-items-center p-4 antialiased`}>{children}</body>
     </html>
   );
 }
