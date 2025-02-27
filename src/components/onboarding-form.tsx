@@ -58,7 +58,7 @@ export default function OnboardingForm() {
             <FormItem className="col-span-1">
               <Label>First Name</Label>
               <FormControl>
-                <Input {...field} />
+                <Input data-testid="first-name-input" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,7 +72,7 @@ export default function OnboardingForm() {
             <FormItem className="col-span-1">
               <Label>Last Name</Label>
               <FormControl>
-                <Input {...field} />
+                <Input data-testid="last-name-input" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -86,7 +86,7 @@ export default function OnboardingForm() {
             <FormItem className="col-span-2">
               <Label>Phone Number</Label>
               <FormControl>
-                <Input {...field} inputMode="numeric" maxLength={12} />
+                <Input data-testid="phone-input" {...field} inputMode="numeric" maxLength={12} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -100,14 +100,14 @@ export default function OnboardingForm() {
             <FormItem className="col-span-2">
               <Label>Corporation Number</Label>
               <FormControl>
-                <Input {...field} inputMode="numeric" maxLength={9} />
+                <Input {...field} data-testid="corporation-input" inputMode="numeric" maxLength={9} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button disabled={isSubmitting} type="submit" className="col-span-2 w-full">
+        <Button data-testid="submit-button" disabled={isSubmitting} type="submit" className="col-span-2 w-full">
           Submit
         </Button>
       </form>
