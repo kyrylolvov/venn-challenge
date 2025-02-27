@@ -1,4 +1,4 @@
-import "./globals.css";
+import "~/styles/globals.css";
 
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sansFont.variable} antialiased`}>{children}</body>
+      <body className={`${sansFont.variable} grid h-screen w-screen place-items-center antialiased`}>{children}</body>
     </html>
   );
 }
