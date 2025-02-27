@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Venn Frontend Challenge (Onboarding Form)
 
-## Getting Started
+A Next.js 15 applications, with onboarding form
 
-First, run the development server:
+## Technical Stack
+- TypeScript
+- React.js
+- Next.js
+- Axios
+- TailwindCSS
+- Bun
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+- Leverages react-hook-form and zod for client-side validation of all form fields.
+- Validates corporation numbers and submits profile details by calling backend endpoints.
+- Built with TailwindCSS to ensure a modern and responsive design.
+- Uses Bun for fast dependency management, development server, and testing.
+
+
+## Local Development
+1. Clone the repository
+```
+git clone https://github.com/kyrylolvov/venn-challenge.git
+cd venn-challenge
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```
+bun install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Start development server
+```
+bun run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
+Make sure to have `.env` file in the root of the project with `NEXT_PUBLIC_API_URL` containing base url for Venn's API
 
-## Learn More
+## Testing
+This project uses bun with happy-dom and react-testing-library. To run the tests:
+```
+bun run test
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+```
+├── src
+│   ├── __tests__           # Folder containing unit tests
+│   ├── api                 # Folder containing axios instance and Venn API calls
+│   ├── app                 # Folder containing layout.tsx and page.tsx
+│   ├── components          # Folder containing components
+│   ├── styles              # Folder containing global styles
+│   ├── utils               # Folder containing utility functions
+├── eslint.config.mjs       # Eslint configuration
+├── prettier.config.mjs     # Prettier configuration
+```
