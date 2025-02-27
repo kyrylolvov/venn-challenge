@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import Confetti from "react-confetti";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,6 +24,7 @@ export type Onboarding = z.infer<typeof onboardingSchema>;
 
 export default function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
   const form = useForm<Onboarding>({
     resolver: zodResolver(onboardingSchema),
@@ -30,6 +32,7 @@ export default function OnboardingForm() {
   });
 
   async function onSubmit(values: Onboarding) {
+    setIsSuccessful(false);
     setIsSubmitting(true);
 
     try {
@@ -46,7 +49,10 @@ export default function OnboardingForm() {
       setIsSubmitting(false);
     }
 
+    setIsSuccessful(true);
     setIsSubmitting(false);
+
+    form.reset();
   }
   return (
     <ReactForm {...form}>
@@ -111,6 +117,8 @@ export default function OnboardingForm() {
           Submit
         </Button>
       </form>
+
+      {isSuccessful && <Confetti numberOfPieces={100} recycle={false} width={document.body.clientWidth} height={document.body.clientHeight} />}
     </ReactForm>
   );
 }
